@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
-function Report() {
-    
+const Report = ({ history }) => {
+    console.log(history.location);
 
     return (
         <div className="report">

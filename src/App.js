@@ -1,30 +1,29 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 
 
-import {Router, Switch, Route } from 'react-router-dom'
+import { Router, Switch, Route, Redirect } from 'react-router-dom'
 
 import 'antd/dist/antd.css';
 import './App.css';
 
-import Sidebar from './pages/SidebarComponent';
 
-import Login from './Authentication/login'
+
+import GlobalContext from './context/GlobalContext'
+
+import { Button } from 'antd'
+
+import RoutesApp from './RoutesApp'
+
 
 function App() {
-
+  const [data, setData] = useState({
+    user: undefined,
+  });
   return (
-    <div>
-      <div>
-
-        <Switch>
-          <Route exact path="/" component={Login}></Route>
-          <Route exact path="/login" component={Login}></Route>
-          <Route exact path="/dashboard" component={Sidebar}></Route>
-        </Switch>
-      </div>
-    </div>
+    <GlobalContext.Provider value={{ ...data, handleChange: setData }} >
+      <RoutesApp></RoutesApp>
+    </GlobalContext.Provider>
   );
-  
 }
 
 export default App;

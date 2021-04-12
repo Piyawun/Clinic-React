@@ -1,129 +1,178 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useHistory } from "react-router-dom";
 
-import {Layout, Menu,Dropdown,Button} from 'antd';
-import {MenuUnfoldOutlined, MenuFoldOutlined, HomeOutlined, PaperClipOutlined, UserOutlined} from '@ant-design/icons';
+import { Layout, Menu, Dropdown, Button } from 'antd';
+import {
+  MenuUnfoldOutlined,
+  MenuFoldOutlined,
+  HomeOutlined,
+  PaperClipOutlined,
+  UserOutlined,
+  UsergroupAddOutlined,
+  FormOutlined,
+  CreditCardOutlined,
+  MedicineBoxOutlined
+} from '@ant-design/icons';
 import { Link } from 'react-router-dom';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Route, } from 'react-router-dom'
 
 import './Sidebar.css'
 
-import Home from './Home';
-import Report from './Report';
+
+import axios from 'axios'
 
 const SidebarData = [
-    {
-        title: 'Home',
-        path: '/',
-        icon: <HomeOutlined />,
-        cName: 'nav-text',
-    },
-    {
-        title: 'Reports',
-        path: '/report',
-        icon: <PaperClipOutlined />,
-        cName: 'nav-text'
-    }
+  {
+    title: 'Home',
+    path: '/',
+    icon: <HomeOutlined />,
+    cName: 'nav-text',
+  },
+  {
+    title: 'Reports',
+    path: '/report',
+    icon: <PaperClipOutlined />,
+    cName: 'nav-text'
+  },
+  {
+    title: 'Patient',
+    path: '/patient',
+    icon: <UsergroupAddOutlined />,
+    cName: 'nav-text'
+  },
+  {
+    title: 'Doctor',
+    path: '/doctor-report',
+    icon: <FormOutlined />,
+    cName: 'nav-text'
+  },
+  {
+    title: 'Payment',
+    path: '/payment',
+    icon: <CreditCardOutlined />,
+    cName: 'nav-text'
+  },
+  {
+    title: 'Medicine',
+    path: '/medicine',
+    icon: <MedicineBoxOutlined />,
+    cName: 'nav-text'
+  }
+  ,
+  {
+    title: 'User Management',
+    path: '/user',
+    icon: <UserOutlined />,
+    cName: 'nav-text'
+  }
 ];
-
-const menu = (
-  <Menu>
-    <Menu.Item>
-      <a target="_blank" rel="noopener noreferrer" href="https://www.antgroup.com">
-        1st menu item
-      </a>
-    </Menu.Item>
-    <Menu.Item>
-      <a target="_blank" rel="noopener noreferrer" href="https://www.aliyun.com">
-        2nd menu item
-      </a>
-    </Menu.Item>
-    <Menu.Item>
-      <a target="_blank" rel="noopener noreferrer" href="https://www.luohanacademy.com">
-        3rd menu item
-      </a>
-    </Menu.Item>
-  </Menu>
-);
-
-
 
 const { Header, Sider, Content, Footer } = Layout;
 
+const Fetch = () => {
+  console.log(localStorage.getItem('expires_in'));
+  axios.get("/patent").then(({ data }) => {
+    console.log(data);
+  })
+}
 
-class SidebarComponent extends React.Component {
+const MenuBar = (history) => {
+  return (
+    <Menu>
+      <Menu.Item>
+        <a rel="noopener noreferrer" href="https://www.antgroup.com">
+          1st menu item
+        </a>
+      </Menu.Item>
+      <Menu.Item>
+        <a target="_blank" rel="noopener noreferrer" href="https://www.aliyun.com">
+          2nd menu item
+        </a>
+      </Menu.Item>
+      <Menu.Item>
+        <a onClick={() => {
 
-        
-  state = {
+          localStorage.removeItem('refreshToken')
+          localStorage.removeItem('accessToken')
+          localStorage.removeItem('expires_in')
+          history.push('/')
+        }}>Logout</a>
+      </Menu.Item>
+    </Menu>
+  )
+}
+
+const SidebarComponent = ({ children }) => {
+  const [state, setState] = useState({
     collapsed: false
-  };
-
-  toggle = () => {
-    this.setState({
-      collapsed: !this.state.collapsed
+  });
+  const toggle = () => {
+    setState({
+      collapsed: !state.collapsed
     });
   };
-  
 
 
-  render() {
-    return (
 
-        <Layout>
-        <Sider style={{ height: 'auto',overflow: 'auto'}} trigger={null} collapsible collapsed={this.state.collapsed}>
-                <div className="logo" />
-                
-          <Menu theme="dark" mode="inline" defaultSelectedKeys={['0']}>
-            
-                    {SidebarData.map((item, index) => {
-                        return (
-                            <Menu.Item key={index} className={item.cName} icon={item.icon}>
-                                <Link to={item.path}>
-                                    <span>
-                                        {item.title}
-                                    </span>
-                                </Link>
-                            </Menu.Item>
-                )
-            })}
-          </Menu>
-        </Sider>
+  let history = useHistory();
 
-        <Layout className="site-layout">
-          <Header
-            className="site-layout-background header"
-            style={{
+  return (
+    <Layout style={{ minHeight: "100vh" }}>
+      <Sider style={{ height: 'auto', overflow: 'auto' }} trigger={null} collapsible collapsed={state.collapsed}>
+        <div className="logo" />
+
+        <Menu theme="dark" mode="inline" defaultSelectedKeys={['0']}>
+
+          {SidebarData.map((item, index) => {
+            return (
+              <Menu.Item key={index} className={item.cName} icon={item.icon}>
+                <Link to={item.path}>
+                  <span>
+                    {item.title}
+                  </span>
+                </Link>
+              </Menu.Item>
+            )
+          })}
+        </Menu>
+      </Sider>
+
+      <Layout className="site-layout">
+        <Header
+          className="site-layout-background header"
+          style={{
             padding: 0
           }}>
-            {React.createElement(this.state.collapsed
-              ? MenuUnfoldOutlined
-              : MenuFoldOutlined, {
-              className: 'trigger',
-              onClick: this.toggle
-            })}
-            <span className="header-profile">
-            <Dropdown overlay={menu} placement="bottomRight" arrow>
+          {React.createElement(state.collapsed
+            ? MenuUnfoldOutlined
+            : MenuFoldOutlined, {
+            className: 'trigger',
+            onClick: toggle
+          })}
+          <span className="header-profile">
+            <Dropdown overlay={MenuBar(history)} placement="bottomRight" arrow>
               <Button><UserOutlined /></Button>
             </Dropdown>
-            </span>
-          </Header>
-          <Content
-            className="site-layout-background"
-            style={{
+          </span>
+        </Header>
+        <Content
+          className="site-layout-background"
+          style={{
             margin: '24px 16px',
             padding: 24,
             minHeight: 280
           }}>
-            <Route exact path="/" component={Home} />
-            <Route path="/report" component={Report} />
-          </Content>
+          <div className="layout-content" style={{ backgroundColor: 'whitesmoke', padding: "10px" }}>
+            {children}
+          </div>
+        </Content>
 
-          <Footer className="footer"style={{ textAlign: 'center' }}>Oatwant Coppyright 2021</Footer>
-
-        </Layout>
+        <Footer className="footer" style={{ textAlign: 'center' }}>Oatwant Coppyright 2021</Footer>
 
       </Layout>
-    )
-  }
+
+    </Layout>
+  )
 }
 
 export default SidebarComponent;
