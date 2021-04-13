@@ -14,7 +14,6 @@ import {
   MedicineBoxOutlined
 } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
-import { BrowserRouter as Router, Switch, Route, } from 'react-router-dom'
 
 import './Sidebar.css'
 
@@ -79,16 +78,6 @@ const Fetch = () => {
 const MenuBar = (history) => {
   return (
     <Menu>
-      <Menu.Item>
-        <a rel="noopener noreferrer" href="https://www.antgroup.com">
-          1st menu item
-        </a>
-      </Menu.Item>
-      <Menu.Item>
-        <a target="_blank" rel="noopener noreferrer" href="https://www.aliyun.com">
-          2nd menu item
-        </a>
-      </Menu.Item>
       <Menu.Item>
         <a onClick={() => {
 
