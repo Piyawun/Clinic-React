@@ -68,7 +68,7 @@ const PatientComponent = ({ history }) => {
         >
           <Space>
             <Button type="primary">เพิ่มผู้ป่วย</Button>
-            
+
           </Space>
         </Col>
 

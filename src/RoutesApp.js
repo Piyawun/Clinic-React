@@ -17,6 +17,8 @@ import DoctorReportComponent from './pages/doctor/DoctorReport'
 import PaymentDetailComponent from './pages/payment/PaymentDetail'
 
 import UserComponent from './pages/user/UserComponent'
+import UserEditComponent from './pages/user/UserEditComponent'
+
 const isLogin = () => {
     if (localStorage.getItem("accessToken")) {
         return true;
@@ -62,6 +64,7 @@ const RoutesApp = () => {
             <PrivateRoute exact path="/medicine" component={MedicineComponent}></PrivateRoute>
             <PrivateRoute exact path="/payment" component={PaymentComponent}></PrivateRoute>
             <PrivateRoute exact path="/user" component={UserComponent}></PrivateRoute>
+            <PrivateRoute exact path="/user/edit/:id" component={UserEditComponent}></PrivateRoute>
             <PrivateRoute exact path="/payment/detail/:id" component={PaymentDetailComponent}></PrivateRoute>
             <PrivateRoute exact path="/medicine/detail/:id" component={MedicineDetailComponent}></PrivateRoute>
         </Switch>
