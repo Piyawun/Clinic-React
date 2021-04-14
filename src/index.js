@@ -5,7 +5,7 @@ import App from './App'
 import { BrowserRouter } from 'react-router-dom'
 import axios from 'axios'
 
-axios.defaults.baseURL = " http://1f2b9ac4c69e.ngrok.io"
+axios.defaults.baseURL = "https://1f2b9ac4c69e.ngrok.io"
 
 axios.interceptors.request.use(async (config) => {
 
