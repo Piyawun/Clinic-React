@@ -6,14 +6,13 @@ import Sidebar from './pages/SidebarComponent';
 
 
 import Home from './pages/Home'
-import Login from './authentication/login'
+import Login from './authentication/Login'
 import PatientComponent from './pages/patient/Patient'
 import PaymentComponent from './pages/payment/Payment'
 import MedicineComponent from './pages/medicine/Medicine'
-
-
 import DoctorComponent from './pages/doctor/Doctor'
 import DoctorReportComponent from './pages/doctor/DoctorReport'
+import PaymentDetailComponent from './pages/payment/PaymentDetail'
 
 import UserComponent from './pages/user/UserComponent'
 const isLogin = () => {
@@ -61,7 +60,7 @@ const RoutesApp = () => {
             <PrivateRoute exact path="/medicine" component={MedicineComponent}></PrivateRoute>
             <PrivateRoute exact path="/payment" component={PaymentComponent}></PrivateRoute>
             <PrivateRoute exact path="/user" component={UserComponent}></PrivateRoute>
-
+            <PrivateRoute exact path="/payment/detail/:id" component={PaymentDetailComponent}></PrivateRoute>
         </Switch>
     )
 }

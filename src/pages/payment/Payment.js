@@ -4,6 +4,7 @@ import { AudioOutlined } from "@ant-design/icons";
 import { Table } from "antd";
 import { Card, Col, Row } from "antd";
 import { Button } from "antd";
+import { Router, Link } from "react-router-dom";
 
 const payment = ({ history }) => {
   const { Search } = Input;
@@ -27,6 +28,18 @@ const payment = ({ history }) => {
     {
       title: "Detail Receipt",
       dataIndex: "detail",
+      render: (text, record) => (
+        <Space size="middle">
+          <Link
+            to={{
+              pathname: `/payment/detail/${record.age}`,
+              query: "/paymant/paymentdetail",
+            }}
+          >
+            <Button type="primary">รับผู้ป่วย {record.name}</Button>
+          </Link>
+        </Space>
+      ),
     },
   ];
   const data = [
@@ -34,7 +47,7 @@ const payment = ({ history }) => {
       key: "1",
       id: "123456",
       name: "นางสาวชอบติ่ง แต่ผู้บอกมันดูบ้าผช",
-      detail: <Button type="primary">พิมพ์ใบเสร็จ</Button> ,
+      detail: "" ,
     },
   ];
 
@@ -50,23 +63,25 @@ const payment = ({ history }) => {
           size="large"
           onSearch={onSearch}
         />
-          </Space>
-    <h1></h1>
+      </Space>
+      <h1></h1>
 
-      <div className="site-card-wrapper">
-        <Row gutter={16}>
-          <Col span={24}>
-            <Card
-              title="List of Prescription (รายละเอียดการสั่งยา)"
-              bordered={false}
-            >
-              <div>
-                <h4></h4>
-                <Table columns={columns} dataSource={data} size="middle" />
-              </div>
-            </Card>
-          </Col>
-        </Row>
+      <div className="touch">
+        <Card className="card" title="จำนวนคิว" bordered={true}>
+          <Row gutter={16}>
+            <Col span={24}>
+              <Card
+                title="List of Prescription (รายละเอียดการสั่งยา)"
+                bordered={false}
+              >
+                <div>
+                  <h4></h4>
+                  <Table columns={columns} dataSource={data} size="middle" />
+                </div>
+              </Card>
+            </Col>
+          </Row>
+        </Card>
       </div>
     </>
   );
