@@ -28,12 +28,6 @@ const SidebarData = [
     cName: 'nav-text',
   },
   {
-    title: 'Reports',
-    path: '/report',
-    icon: <PaperClipOutlined />,
-    cName: 'nav-text'
-  },
-  {
     title: 'Patient',
     path: '/patient',
     icon: <UsergroupAddOutlined />,

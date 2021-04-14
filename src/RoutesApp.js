@@ -4,9 +4,13 @@ import { Router, Switch, Route, Redirect } from 'react-router-dom'
 
 import Sidebar from './pages/SidebarComponent';
 
-import Login from './authentication/Login'
-import Home from './pages/Home'
 import Report from './pages/Report'
+import Home from './pages/Home'
+import Login from './authentication/login'
+import PatientComponent from './pages/Patient'
+import DoctorComponent from './pages/Doctor'
+import PaymentComponent from './pages/Payment'
+import MedicineComponent from './pages/Medicine'
 
 const isLogin = () => {
     if (localStorage.getItem("accessToken")) {
@@ -41,19 +45,16 @@ const PublicRoute = ({ component: Component, force, ...rest }) => {
 };
 
 const RoutesApp = () => {
- 
+
     return (
         <Switch>
             <PublicRoute exact path="/" force={true} component={Login}></PublicRoute>
             <PublicRoute exact path="/login" force={true} component={Login}></PublicRoute>
             <PrivateRoute exact path="/dashboard" component={Home}></PrivateRoute>
-            <PrivateRoute exact path="/report" component={Report}></PrivateRoute>
-            <PrivateRoute exact path="/patient" component={Report}></PrivateRoute>
-            <PrivateRoute exact path="/doctor-report" component={Report}></PrivateRoute>
-            <PrivateRoute exact path="/medicine" component={Report}></PrivateRoute>
-            <PrivateRoute exact path="/user" component={Report}></PrivateRoute>
-            <PrivateRoute exact path="/payment" component={Report}></PrivateRoute>
-
+            <PrivateRoute exact path="/patient" component={PatientComponent}></PrivateRoute>
+            <PrivateRoute exact path="/doctor-report" component={DoctorComponent}></PrivateRoute>
+            <PrivateRoute exact path="/medicine" component={MedicineComponent}></PrivateRoute>
+            <PrivateRoute exact path="/payment" component={PaymentComponent}></PrivateRoute>
         </Switch>
     )
 }
