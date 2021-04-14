@@ -35,7 +35,7 @@ const SidebarData = [
   },
   {
     title: 'Doctor',
-    path: '/doctor-report',
+    path: '/doctor',
     icon: <FormOutlined />,
     cName: 'nav-text'
   },
