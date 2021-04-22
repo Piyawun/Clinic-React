@@ -78,6 +78,7 @@ const MenuBar = (history) => {
           localStorage.removeItem('refreshToken')
           localStorage.removeItem('accessToken')
           localStorage.removeItem('expires_in')
+          localStorage.removeItem('staffID')
           history.push('/')
         }}>Logout</a>
       </Menu.Item>

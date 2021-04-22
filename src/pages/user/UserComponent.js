@@ -1,10 +1,10 @@
 import React from 'react';
-import { Table, Tag, Radio, Space, Button, Card } from 'antd';
+import { Table, Space, Button, Card } from 'antd';
 
-import { Router, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import axios from 'axios';
-import Swal from 'sweetalert2/dist/sweetalert2'
-import 'sweetalert2/dist/sweetalert2'
+import Swal from 'sweetalert2/dist/sweetalert2.all.min'
+import 'sweetalert2/dist/sweetalert2.min'
 
 class UserComponent extends React.Component {
 
@@ -22,8 +22,17 @@ class UserComponent extends React.Component {
 
     getData() {
         axios.get('/user').then(res => {
-            const user = res.data;
-            this.setState({ staff: user })
+
+            const data = res.data.map(row => ({
+                key: row._id,
+                staffID: row._id,
+                username: row.username,
+                name: row.name,
+                role: row.role,
+                department: row.department
+            }))
+
+            this.setState({ staff: data })
         }).catch(err => {
             console.error(err)
         })
@@ -42,24 +51,31 @@ class UserComponent extends React.Component {
             cancelButtonText: "cancel",
         }).then((res) => {
             if (res.isConfirmed) {
-                // Swal.fire({
-                //     title: "Confirm to delete",
-                //     text: "Are you sure you want to delete",
-                //     type: "info",
-                //     icon: "success",
-                // })
+                Swal.fire({
+                    title: "Confirm to delete",
+                    text: "Are you sure you want to delete",
+                    type: "info",
+                    icon: "success",
+                })
 
                 // Function delete
-            } 
+            }
         }
         )
 
     }
 
+
+
     render() {
 
-
-
+        const body = {
+            "username": "OatThanathipCH",
+            "password": "123456",
+            "name": "User admin",
+            "role": "Admin",
+            "department": "Doctor"
+        }
 
         const columns = [
             {
@@ -126,6 +142,11 @@ class UserComponent extends React.Component {
 
             <div className="touch">
                 <Card className="card" title="ระบบสมาชิก">
+                    <Link to={{ pathname: `/user/add`, query: "/user/add" }} >
+                        <Button type="text" style={{ backgroundColor: 'green', color: 'white' }}>
+                            Add member </Button>
+                    </Link>
+
                     <Table
                         columns={columns}
                         pagination={{ position: [state.bottom] }}

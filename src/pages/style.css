@@ -7,14 +7,16 @@
   .touch .card {
     border: none;
     border-radius: 1rem;
+    box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
+
   }
   
   @media (min-width: 992px) {
     .touch .card:hover {
-      margin-top: -.25rem;
-      margin-bottom: .25rem;
-      box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
-      transition: .2s;
+      margin-top: -.30rem;
+      margin-bottom: .30rem;
+      box-shadow: 0 0.7rem 1rem 0 rgba(0, 0, 0, 0.1);
+      transition: .3s;
     }
   
   }

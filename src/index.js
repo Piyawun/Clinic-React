@@ -5,13 +5,13 @@ import App from './App'
 import { BrowserRouter } from 'react-router-dom'
 import axios from 'axios'
 
-axios.defaults.baseURL = "http://localhost:5000"
+axios.defaults.baseURL = "http://localhost:5000/"
 
 axios.interceptors.request.use(async (config) => {
 
   let headers = config.headers
 
-  if (localStorage.getItem('accessToken') && config.url != "/authentication/token/refresh") {
+  if (localStorage.getItem('accessToken') && config.url !== "/authentication/token/refresh") {
     if (Math.floor(Date.now() / 1000) > localStorage.getItem('expires_in')) {
       await axios.post("/authentication/token/refresh", {}, {
         headers: {

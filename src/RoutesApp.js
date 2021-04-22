@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Router, Switch, Route, Redirect } from 'react-router-dom'
+import { Switch, Route, Redirect } from 'react-router-dom'
 
 import Sidebar from './pages/SidebarComponent';
 
@@ -18,7 +18,7 @@ import PaymentDetailComponent from './pages/payment/PaymentDetail'
 
 import UserComponent from './pages/user/UserComponent'
 import UserEditComponent from './pages/user/UserEditComponent'
-
+import AddUserComponent from './pages/user/AddUserComponent'
 const isLogin = () => {
     if (localStorage.getItem("accessToken")) {
         return true;
@@ -64,6 +64,7 @@ const RoutesApp = () => {
             <PrivateRoute exact path="/medicine" component={MedicineComponent}></PrivateRoute>
             <PrivateRoute exact path="/payment" component={PaymentComponent}></PrivateRoute>
             <PrivateRoute exact path="/user" component={UserComponent}></PrivateRoute>
+            <PrivateRoute exact path="/user/add" component={AddUserComponent}></PrivateRoute>
             <PrivateRoute exact path="/user/edit/:id" component={UserEditComponent}></PrivateRoute>
             <PrivateRoute exact path="/payment/detail/:id" component={PaymentDetailComponent}></PrivateRoute>
             <PrivateRoute exact path="/medicine/detail/:id" component={MedicineDetailComponent}></PrivateRoute>

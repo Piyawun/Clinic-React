@@ -1,69 +1,30 @@
 import React from 'react';
 
-import { Card } from 'antd'
+import { Card, Form, Input, Button } from 'antd';
 
-import { Form, Input, Button } from 'antd';
+import axios from 'axios';
 
-import axios from 'axios'
+import Swal from 'sweetalert2/dist/sweetalert2.all.min'
+import 'sweetalert2/dist/sweetalert2.min'
 
-import Swal from 'sweetalert2/dist/sweetalert2.js'
-class UserEditComponent extends React.Component {
-    formRef = React.createRef();
-
+class AddUserComponent extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            staff: []
-        }
 
     }
 
-    handleChange = (e) => {
-        this.setState({ staff: e.target.value })
-    }
-    componentDidMount() {
-        this.getData();
-    }
-
-    getData() {
-
-        const staffID = this.props.match.params.id
-        const json = JSON.stringify({ staffID })
-        const x = axios.get('/user/id', { params: { staffID } })
-            .then(res => {
-                this.state.staff = res.data
-                this.setFormValue(res.data[0])
-                // console.log(res.data)
-            }).catch(err => {
-                console.error(err)
-            })
-
-    }
-    setFormValue(data) {
-        this.formRef.current.setFieldsValue({
-            name: data.name ? data.name : '',
-            username: data.username ? data.username : ' ',
-            role: data.role ? data.role : ''
-
-
-        })
-    }
-
-    saveFormData() {
-
-    }
 
     render() {
+
 
         const layout = {
             labelCol: {
                 span: 8,
             },
             wrapperCol: {
-                span: 8,
+                span: 10,
             },
         };
-        /* eslint-disable no-template-curly-in-string */
 
         const validateMessages = {
             required: '${label} is required!',
@@ -75,35 +36,23 @@ class UserEditComponent extends React.Component {
                 range: '${label} must be between ${min} and ${max}',
             },
         };
-        /* eslint-enable no-template-curly-in-string */
 
         const onFinish = (values) => {
-            const staffID = this.state.staff[0]._id
-
-            const data = {
-                staffID: staffID,
-                username: values.username,
-                name: values.name,
-                role: values.role
-            }
-            console.log(data)
-            axios.put('user/id', data).then(res => {
-                if (res.status === 200) {
+            axios.post('authentication/signup', values.user).then(res => {
+                if (res.status === 201) {
                     Toast.fire({
                         icon: 'success',
                         title: 'Update success'
                     }).then(() => {
                         window.location = "/user";
                     })
-
-                } else {
+                } else  {
                     Toast.fire({
                         icon: 'error',
-                        title: 'Fail to update'
+                        title: 'Fail to add user please check again'
                     })
                 }
-
-                console.log(res.status)
+                console.log(res)
             })
         };
 
@@ -119,18 +68,13 @@ class UserEditComponent extends React.Component {
             }
         })
 
-
-
-
-
         return (
             <div className="touch">
-                <Card title="Edit" className="card" bordered={true}>
-                    <h1>{this.state.staff[0]}</h1>
-                    <Form {...layout} ref={this.formRef} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
+                <Card className="card" title="เพิ่มสมาชิก">
+                    <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
                         <Form.Item
-                            name="name"
-                            label="Name"
+                            name={['user', 'username']}
+                            label="username"
                             rules={[
                                 {
                                     required: true,
@@ -140,8 +84,21 @@ class UserEditComponent extends React.Component {
                             <Input />
                         </Form.Item>
                         <Form.Item
-                            name="username"
-                            label="Username"
+                            name={['user', 'password']}
+                            label="Password"
+                            rules={[
+                                {
+                                    required: true
+                                },
+                                { min: 6, message: 'กรุณากรอกรหัสผ่าน 6 ตัวขึ้นไป' }
+
+                            ]}
+                        >
+                            <Input.Password />
+                        </Form.Item>
+                        <Form.Item
+                            name={['user', 'name']}
+                            label="name"
                             rules={[
                                 {
                                     required: true,
@@ -151,7 +108,7 @@ class UserEditComponent extends React.Component {
                             <Input />
                         </Form.Item>
                         <Form.Item
-                            name="role"
+                            name={['user', 'role']}
                             label="Role"
                             rules={[
                                 {
@@ -161,6 +118,19 @@ class UserEditComponent extends React.Component {
                         >
                             <Input />
                         </Form.Item>
+                        <Form.Item
+                            name={['user', 'department']}
+                            label="department"
+                            rules={[
+                                {
+                                    required: true,
+                                },
+                            ]}
+                        >
+                            <Input />
+                        </Form.Item>
+
+
                         <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
                             <Button type="primary" htmlType="submit">
                                 Submit
@@ -173,4 +143,4 @@ class UserEditComponent extends React.Component {
     }
 }
 
-export default UserEditComponent;
+export default AddUserComponent;
