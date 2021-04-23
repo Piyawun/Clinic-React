@@ -45,8 +45,6 @@ class UserEditComponent extends React.Component {
             name: data.name ? data.name : '',
             username: data.username ? data.username : ' ',
             role: data.role ? data.role : ''
-
-
         })
     }
 
