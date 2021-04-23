@@ -6,7 +6,7 @@ import Sidebar from './pages/SidebarComponent';
 
 
 import Home from './pages/Home'
-import Login from './authentication/Login'
+import Login from './authentication/login'
 import PatientComponent from './pages/patient/Patient'
 import PaymentComponent from './pages/payment/Payment'
 import MedicineComponent from './pages/medicine/Medicine'
