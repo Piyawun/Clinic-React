@@ -20,45 +20,6 @@ import './Sidebar.css'
 
 import axios from 'axios'
 
-const SidebarData = [
-  {
-    title: 'Home',
-    path: '/',
-    icon: <HomeOutlined />,
-    cName: 'nav-text',
-  },
-  {
-    title: 'Patient',
-    path: '/patient',
-    icon: <UsergroupAddOutlined />,
-    cName: 'nav-text'
-  },
-  {
-    title: 'Doctor',
-    path: '/doctor',
-    icon: <FormOutlined />,
-    cName: 'nav-text'
-  },
-  {
-    title: 'Payment',
-    path: '/payment',
-    icon: <CreditCardOutlined />,
-    cName: 'nav-text'
-  },
-  {
-    title: 'Medicine',
-    path: '/medicine',
-    icon: <MedicineBoxOutlined />,
-    cName: 'nav-text'
-  }
-  ,
-  {
-    title: 'User Management',
-    path: '/user',
-    icon: <UserOutlined />,
-    cName: 'nav-text'
-  }
-];
 
 const { Header, Sider, Content, Footer } = Layout;
 
@@ -97,7 +58,7 @@ const SidebarComponent = ({ children }) => {
   };
 
 
-
+  const { SubMenu } = Menu;
   let history = useHistory();
 
   return (
@@ -107,17 +68,83 @@ const SidebarComponent = ({ children }) => {
 
         <Menu theme="dark" mode="inline" defaultSelectedKeys={['0']}>
 
-          {SidebarData.map((item, index) => {
-            return (
-              <Menu.Item key={index} className={item.cName} icon={item.icon}>
-                <Link to={item.path}>
-                  <span>
-                    {item.title}
-                  </span>
-                </Link>
-              </Menu.Item>
-            )
-          })}
+          <Menu.Item key="home" icon={<HomeOutlined />}>
+            <Link to={'/'}>
+              Home
+            </Link>
+          </Menu.Item>
+
+          <Menu.Item key="patient" icon={<UsergroupAddOutlined />}>
+
+            <Link to={'/patient'}>
+              Patient
+            </Link>
+          </Menu.Item>
+
+          <SubMenu key="doctor" icon={<FormOutlined />} title="Doctor">
+            <Menu.Item key="report-1">
+              <Link to={'/doctor'}>
+                รับคิวผู้ป่วย
+              </Link>
+            </Menu.Item>
+            <Menu.Item key="report-2">
+              <Link to={'/doctor/in-process'}>
+                กำลังตรวจ
+              </Link>
+            </Menu.Item>
+            <Menu.Item key="report-3">
+              <Link to={'/doctor/complase'}>
+                ตรวจเสร็จ
+              </Link>
+            </Menu.Item>
+            <Menu.Item key="report-3">
+              <Link to={'/doctor/view-report'}>
+                ผลตรวจ
+              </Link>
+            </Menu.Item>
+          </SubMenu>
+
+          <SubMenu key="payment" icon={<CreditCardOutlined />} title="Payment">
+            <Menu.Item key="payment-1">
+              <Link to={'/payment'}>
+                Bill
+              </Link></Menu.Item>
+            <Menu.Item key="payment-2">View bill</Menu.Item>
+            <Menu.Item key="payment-3">--</Menu.Item>
+            <Menu.Item key="payment-4">--</Menu.Item>
+            <Menu.Item key="payment-5">--</Menu.Item>
+          </SubMenu>
+
+          <SubMenu key="medicine" icon={<CreditCardOutlined />} title="Medicine">
+            <Menu.Item key="medicine-1">
+              <Link to={'/medicine'}>
+              </Link>Dispense
+            </Menu.Item>
+            <Menu.Item key="medicine-2">
+              <Link to={'/medicine/view'}>
+              </Link>View medicine
+            </Menu.Item>
+            <Menu.Item key="medicine-3">
+              <Link to={'/medicine/add'}>
+              </Link>Add medicine
+            </Menu.Item>
+            <Menu.Item key="medicine-4"></Menu.Item>
+            <Menu.Item key="medicine-5">--</Menu.Item>
+          </SubMenu>
+
+          <SubMenu key="user" icon={<UserOutlined />} title="User Management">
+            <Menu.Item key="users-1">
+              <Link to={'/user'}>
+                View Staff
+              </Link>
+            </Menu.Item>
+            <Menu.Item key="users-2">
+              <Link to={'/user/add'}>
+                Add Staff
+              </Link>
+            </Menu.Item>
+          </SubMenu>
+
         </Menu>
       </Sider>
 

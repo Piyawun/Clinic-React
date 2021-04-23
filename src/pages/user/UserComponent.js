@@ -69,13 +69,7 @@ class UserComponent extends React.Component {
 
     render() {
 
-        const body = {
-            "username": "OatThanathipCH",
-            "password": "123456",
-            "name": "User admin",
-            "role": "Admin",
-            "department": "Doctor"
-        }
+        
 
         const columns = [
             {

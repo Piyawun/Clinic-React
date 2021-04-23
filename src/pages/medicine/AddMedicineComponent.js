@@ -1,17 +1,11 @@
-import React from 'react';
+import React from 'react'
 
-import { Card, Form, Input, Button } from 'antd';
-
+import { Card, Form, Input, Button, InputNumber, DatePicker } from 'antd';
 import axios from 'axios';
 
 import Swal from 'sweetalert2/dist/sweetalert2.all.min'
 import 'sweetalert2/dist/sweetalert2.min'
-
-class AddUserComponent extends React.Component {
-    constructor(props) {
-        super(props);
-
-    }
+class AddMedicineComponent extends React.Component {
 
 
     render() {
@@ -38,18 +32,19 @@ class AddUserComponent extends React.Component {
         };
 
         const onFinish = (values) => {
-            axios.post('authentication/signup', values.user).then(res => {
+            console.log(values)
+            axios.post('medicine', values.medicine).then(res => {
                 if (res.status === 201) {
                     Toast.fire({
                         icon: 'success',
                         title: 'Create success'
                     }).then(() => {
-                        window.location = "/user";
+                        window.location = "/medicine/view";
                     })
                 } else {
                     Toast.fire({
                         icon: 'error',
-                        title: 'Fail to add user please check again'
+                        title: 'Fail to add medicine please check again'
                     })
                 }
                 console.log(res)
@@ -68,13 +63,14 @@ class AddUserComponent extends React.Component {
             }
         })
 
+
         return (
             <div className="touch">
-                <Card className="card" title="เพิ่มสมาชิก">
+                <Card className="card" title="เพิ่มยาลงคลัง">
                     <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
                         <Form.Item
-                            name={['user', 'username']}
-                            label="username"
+                            name={['medicine', 'name']}
+                            label="Name"
                             rules={[
                                 {
                                     required: true,
@@ -84,50 +80,70 @@ class AddUserComponent extends React.Component {
                             <Input />
                         </Form.Item>
                         <Form.Item
-                            name={['user', 'password']}
-                            label="Password"
+                            name={['medicine', 'amount']}
+                            label="Amount"
                             rules={[
                                 {
-                                    required: true
+                                    type: 'number',
+                                    min: 0,
+                                    max: 1000000,
                                 },
-                                { min: 6, message: 'กรุณากรอกรหัสผ่าน 6 ตัวขึ้นไป' }
+                                {
+                                    required: true,
+                                },
+                            ]}
+                        >
+                            <InputNumber />
+                        </Form.Item>
+                        <Form.Item
+                            name={['medicine', 'lot_num']}
+                            label="LOT_NUM"
+                            rules={[
+                                {
+                                    required: true,
+                                },
+                            ]}
+                        >
+                            <Input />
+                        </Form.Item>
+                        <Form.Item
+                            name={['medicine', 'MFG']}
+                            label="MFG"
+                            rules={[
+                                {
+                                    required: true,
+                                },
+                            ]}
+                        >
+                            <DatePicker />
+                        </Form.Item>
+                        <Form.Item
+                            name={['medicine', 'EXP']}
+                            label="EXP"
+                            rules={[
+                                {
+                                    required: true,
+                                },
+                            ]}
+                        >
+                            <DatePicker />
 
-                            ]}
-                        >
-                            <Input.Password />
                         </Form.Item>
                         <Form.Item
-                            name={['user', 'name']}
-                            label="name"
+                            name={['medicine', 'price']}
+                            label="Price"
                             rules={[
+                                {
+                                    type: 'number',
+                                    min: 0,
+                                    max: 1000000,
+                                },
                                 {
                                     required: true,
                                 },
                             ]}
                         >
-                            <Input />
-                        </Form.Item>
-                        <Form.Item
-                            name={['user', 'role']}
-                            label="Role"
-                            rules={[
-                                {
-                                    required: true,
-                                },
-                            ]}
-                        >
-                            <Input />
-                        </Form.Item>
-                        <Form.Item
-                            name={['user', 'department']}
-                            label="department"
-                            rules={[
-                                {
-                                    required: true,
-                                },
-                            ]}
-                        >
-                            <Input />
+                            <InputNumber />
                         </Form.Item>
 
 
@@ -136,12 +152,13 @@ class AddUserComponent extends React.Component {
                                 Submit
                             </Button>
                         </Form.Item>
-                        
                     </Form>
                 </Card>
             </div>
         )
     }
+
 }
 
-export default AddUserComponent;
+
+export default AddMedicineComponent;

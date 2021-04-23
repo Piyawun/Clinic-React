@@ -19,6 +19,11 @@ import PaymentDetailComponent from './pages/payment/PaymentDetail'
 import UserComponent from './pages/user/UserComponent'
 import UserEditComponent from './pages/user/UserEditComponent'
 import AddUserComponent from './pages/user/AddUserComponent'
+import AddMedicineComponent from './pages/medicine/AddMedicineComponent';
+import ViewMedicine from './pages/medicine/ViewMedicine';
+import AddPatientComponent from './pages/patient/AddPatientComponent';
+import ViewReportPatientComponent from './pages/patient/ViewReportPatientComponent';
+import EditPatientComponent from './pages/patient/EditPatientComponent';
 const isLogin = () => {
     if (localStorage.getItem("accessToken")) {
         return true;
@@ -55,19 +60,31 @@ const RoutesApp = () => {
 
     return (
         <Switch>
+
             <PublicRoute exact path="/" force={true} component={Login}></PublicRoute>
             <PublicRoute exact path="/login" force={true} component={Login}></PublicRoute>
             <PrivateRoute exact path="/dashboard" component={Home}></PrivateRoute>
+
             <PrivateRoute exact path="/patient" component={PatientComponent}></PrivateRoute>
+            <PrivateRoute exact path="/patient/add" component={AddPatientComponent}></PrivateRoute>
+            <PrivateRoute exact path="/patient/view-report/:id" component={ViewReportPatientComponent}></PrivateRoute>
+            <PrivateRoute exact path="/patient/edit/:id" component={EditPatientComponent}></PrivateRoute>
+
             <PrivateRoute exact path="/doctor" component={DoctorComponent}></PrivateRoute>
             <PrivateRoute exact path="/doctor/report/:id" component={DoctorReportComponent}></PrivateRoute>
-            <PrivateRoute exact path="/medicine" component={MedicineComponent}></PrivateRoute>
-            <PrivateRoute exact path="/payment" component={PaymentComponent}></PrivateRoute>
+
             <PrivateRoute exact path="/user" component={UserComponent}></PrivateRoute>
             <PrivateRoute exact path="/user/add" component={AddUserComponent}></PrivateRoute>
             <PrivateRoute exact path="/user/edit/:id" component={UserEditComponent}></PrivateRoute>
+
+            <PrivateRoute exact path="/payment" component={PaymentComponent}></PrivateRoute>
             <PrivateRoute exact path="/payment/detail/:id" component={PaymentDetailComponent}></PrivateRoute>
+
+            <PrivateRoute exact path="/medicine" component={MedicineComponent}></PrivateRoute>
             <PrivateRoute exact path="/medicine/detail/:id" component={MedicineDetailComponent}></PrivateRoute>
+            <PrivateRoute exact path="/medicine/add" component={AddMedicineComponent}></PrivateRoute>
+            <PrivateRoute exact path="/medicine/view" component={ViewMedicine}></PrivateRoute>
+
         </Switch>
     )
 }

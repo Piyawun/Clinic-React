@@ -15,7 +15,7 @@ const MedicineDetailComponent = ({ history }) => {
   );
   const onSearch = (value) => console.log(value);
 
-  
+
   const data = [
     "ยาแก้ปวด",
     "ยาบ้า",
@@ -26,14 +26,14 @@ const MedicineDetailComponent = ({ history }) => {
 
   return (
     <>
-      
 
-      <Space>
+
+      {/* <Space>
         <Button>คิวที่</Button>
         <Button type="primary">ยาหมดอายุ</Button>
         <Button type="primary">ยาที่มี</Button>
         <Button type="primary">เพิ่มยา</Button>
-      </Space>
+      </Space> */}
       <div className="touch">
         <Card className="card" bordered={true}>
           <Divider orientation="left">ใบสั่งยา</Divider>
