@@ -13,8 +13,9 @@ import MedicineComponent from './pages/medicine/Medicine'
 import MedicineDetailComponent from './pages/medicine/MedicineDetail'
 
 import DoctorComponent from './pages/doctor/Doctor'
-import DoctorReportComponent from './pages/doctor/DoctorReport'
+// import DoctorReportComponent from './pages/doctor/DoctorReport'
 import PaymentDetailComponent from './pages/payment/PaymentDetail'
+import ProcessComponent from './pages/doctor/ProcessComponent'
 
 import UserComponent from './pages/user/UserComponent'
 import UserEditComponent from './pages/user/UserEditComponent'
@@ -24,6 +25,9 @@ import ViewMedicine from './pages/medicine/ViewMedicine';
 import AddPatientComponent from './pages/patient/AddPatientComponent';
 import ViewReportPatientComponent from './pages/patient/ViewReportPatientComponent';
 import EditPatientComponent from './pages/patient/EditPatientComponent';
+import DoctorDispenseComponent from './pages/doctor/DoctorDispenseComponent';
+import AddOrderPaymentComponent from './pages/payment/AddOrderPaymentComponent';
+
 const isLogin = () => {
     if (localStorage.getItem("accessToken")) {
         return true;
@@ -69,15 +73,19 @@ const RoutesApp = () => {
             <PrivateRoute exact path="/patient/add" component={AddPatientComponent}></PrivateRoute>
             <PrivateRoute exact path="/patient/view-report/:id" component={ViewReportPatientComponent}></PrivateRoute>
             <PrivateRoute exact path="/patient/edit/:id" component={EditPatientComponent}></PrivateRoute>
-
+            <PrivateRoute exact path="/patient/report/:id" component={ViewReportPatientComponent}></PrivateRoute>
+                
             <PrivateRoute exact path="/doctor" component={DoctorComponent}></PrivateRoute>
-            <PrivateRoute exact path="/doctor/report/:id" component={DoctorReportComponent}></PrivateRoute>
+            {/* <PrivateRoute exact path="/doctor/report/:id" component={DoctorReportComponent}></PrivateRoute> */}
+            <PrivateRoute exact path="/doctor/process/:id" component={ProcessComponent}></PrivateRoute>
+            <PrivateRoute exact path="/doctor/dispense/:id" component={DoctorDispenseComponent}></PrivateRoute>
 
             <PrivateRoute exact path="/user" component={UserComponent}></PrivateRoute>
             <PrivateRoute exact path="/user/add" component={AddUserComponent}></PrivateRoute>
             <PrivateRoute exact path="/user/edit/:id" component={UserEditComponent}></PrivateRoute>
 
             <PrivateRoute exact path="/payment" component={PaymentComponent}></PrivateRoute>
+            <PrivateRoute exact path="/payment/add" component={AddOrderPaymentComponent}></PrivateRoute>
             <PrivateRoute exact path="/payment/detail/:id" component={PaymentDetailComponent}></PrivateRoute>
 
             <PrivateRoute exact path="/medicine" component={MedicineComponent}></PrivateRoute>
