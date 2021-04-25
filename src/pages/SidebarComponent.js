@@ -87,32 +87,13 @@ const SidebarComponent = ({ children }) => {
                 รับคิวผู้ป่วย
               </Link>
             </Menu.Item>
-            <Menu.Item key="report-2">
-              <Link to={'/doctor/in-process'}>
-                กำลังตรวจ
-              </Link>
-            </Menu.Item>
-            <Menu.Item key="report-3">
-              <Link to={'/doctor/complase'}>
-                ตรวจเสร็จ
-              </Link>
-            </Menu.Item>
-            <Menu.Item key="report-3">
-              <Link to={'/doctor/view-report'}>
-                ผลตรวจ
-              </Link>
-            </Menu.Item>
           </SubMenu>
 
           <SubMenu key="payment" icon={<CreditCardOutlined />} title="Payment">
             <Menu.Item key="payment-1">
               <Link to={'/payment'}>
-                Bill
+                Payment
               </Link></Menu.Item>
-            <Menu.Item key="payment-2">View bill</Menu.Item>
-            <Menu.Item key="payment-3">--</Menu.Item>
-            <Menu.Item key="payment-4">--</Menu.Item>
-            <Menu.Item key="payment-5">--</Menu.Item>
           </SubMenu>
 
           <SubMenu key="medicine" icon={<CreditCardOutlined />} title="Medicine">
@@ -128,8 +109,6 @@ const SidebarComponent = ({ children }) => {
               <Link to={'/medicine/add'}>
               </Link>Add medicine
             </Menu.Item>
-            <Menu.Item key="medicine-4"></Menu.Item>
-            <Menu.Item key="medicine-5">--</Menu.Item>
           </SubMenu>
 
           <SubMenu key="user" icon={<UserOutlined />} title="User Management">
