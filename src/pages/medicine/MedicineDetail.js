@@ -1,58 +1,135 @@
 import React from "react";
 import { AudioOutlined } from "@ant-design/icons";
-import ReactDOM from "react-dom";
-import { Card, Button, Space, Input, List, Divider, Typography } from "antd";
+import { Router, Link } from "react-router-dom";
+import { Card, Col, Row, Button, Modal, Space, Search, Input, Table, Tag } from "antd";
 
-const MedicineDetailComponent = ({ history }) => {
-  const { Search } = Input;
-  const suffix = (
-    <AudioOutlined
-      style={{
-        fontSize: 16,
-        color: "#1890ff",
-      }}
-    />
-  );
-  const onSearch = (value) => console.log(value);
+import axios from 'axios'
+import Swal from "sweetalert2";
+class MedicineDetailComponent extends React.Component {
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      medicine: [],
+      id: this.props.match.params.id,
+      patient: [],
+      color: "",
+      status: ""
+    }
+  }
+
+  componentDidMount() {
+    this.getData()
+  }
+
+  async getData() {
+    const responseMedicine = await axios.get('/dispense/id', { params: { reportID: this.state.id } })
+    const responseReport = await axios.get('/report/id', { params: { reportID: this.state.id } })
+    if (responseMedicine.status == 200) {
+
+      const data = []
+      responseMedicine.data.map(value => {
+        const x = {
+          'reportID': value['reportID'],
+          'id': value['_id'],
+          'name': value['meds'][0]?.name,
+          'amount': value['amount'],
+        }
+        data.push(x)
+      })
+      this.setState({ medicine: data })
+      this.setState({ patient: responseReport.data['patient'] })
+      this.setState({ status: responseMedicine.data[0]?.status })
+      if (this.state.status === "รอรับยา") {
+        this.setState({ color: "warning" })
+      } else {
+        this.setState({ color: "green" })
+      }
+    } else {
+
+    }
+  }
+
+  confirmDispense() {
+    const data = {
+      reportID: this.state.id
+    }
+    axios.post('/dispense/confirm', data)
+      .then(res => {
+        Swal.fire(
+          'Success',
+          'จ่ายยาสำเร็จ',
+          'success'
+        )
+        window.location = '/medicine/detail/'+ this.state.id
+      }).catch(err => {
+        console.log(err)
+      })
+  }
+
+  render() {
 
 
-  const data = [
-    "ยาแก้ปวด",
-    "ยาบ้า",
-    "ยาไอซ์",
-    "ยาอี",
-    "ยาม้า",
-  ];
 
-  return (
-    <>
+    const data = this.state.medicine
 
 
-      {/* <Space>
-        <Button>คิวที่</Button>
-        <Button type="primary">ยาหมดอายุ</Button>
-        <Button type="primary">ยาที่มี</Button>
-        <Button type="primary">เพิ่มยา</Button>
-      </Space> */}
-      <div className="touch">
-        <Card className="card" bordered={true}>
-          <Divider orientation="left">ใบสั่งยา</Divider>
-          <List
-            size="large"
-            header={<div>รายการยา</div>}
-            footer={<div>รวมทั้งหมด</div>}
-            bordered
-            dataSource={data}
-            renderItem={item => (
-              <List.Item>
-                <Typography.Text mark>[-]</Typography.Text> {item}
-              </List.Item>)}
-          />
-        </Card>
-      </div>
-    </>
-  );
-};
+    const columns = [
+      {
+        title: "ID",
+        dataIndex: "id",
+        key: 'id',
+        responsive: ['xs', 'sm', 'md', 'lg', 'xl'],
 
+      },
+      {
+        title: "ชื่อยา",
+        dataIndex: "name",
+        key: 'name',
+        responsive: ['xs', 'sm', 'md', 'lg', 'xl'],
+      },
+      {
+        title: "จำนวน",
+        dataIndex: "amount",
+        key: 'amount',
+        responsive: ['xs', 'sm', 'md', 'lg', 'xl'],
+      }
+    ];
+
+    return (
+      <>
+        <Row>
+          <Col xs={24} sm={24} md={12} lg={12} xl={12}>
+            <Button type="primary"></Button>
+
+            <div className="touch">
+              <Card className="card" title="รายละเอียด" bordered={true} style={{ marginRight: '10px' }}>
+                <Table columns={columns} dataSource={data} size="small" />
+                <hr></hr>
+              </Card>
+            </div>
+          </Col>
+          <Col xs={24} sm={24} md={12} lg={12} xl={12}>
+            <Button type="primary"></Button>
+
+            <div className="touch">
+              <Card className="card" title="ข้อมูลผู้ป่วย" bordered={true} style={{ marginLeft: '10px' }}>
+                <p>ชื่อ : {this.state.patient.name}</p>
+                <p>วันเกิด : {this.state.patient.dob}</p>
+                <p>อีเมล : {this.state.patient.email}</p>
+                <p>เบอร์โทรศัพท์ : {this.state.patient.tel}</p>
+                <hr></hr>
+                <h1><Tag color={this.state.color}>{this.state.status}</Tag></h1>
+                <Button onClick={() => { this.confirmDispense() }} type="text" style={{ backgroundColor: 'green', color: 'white' }}>ยืนยันจ่ายยา</Button>
+              </Card>
+            </div>
+          </Col>
+        </Row>
+
+      </>
+    )
+  }
+
+}
 
 export default MedicineDetailComponent;

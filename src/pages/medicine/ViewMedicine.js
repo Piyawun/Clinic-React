@@ -20,7 +20,6 @@ class ViewMedicine extends React.Component {
 
     getData() {
         axios.get('/medicine').then(res => {
-            console.log(res)
             const data = res.data.map(row => ({
                 key: row._id,
                 medID: row._id,
