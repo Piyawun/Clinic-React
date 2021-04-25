@@ -19,16 +19,16 @@ const dateFormat = "YYYY/MM/DD";
 const customFormat = (value) => `custom format: ${value.format(dateFormat)}`;
 
 class EditPatientComponent extends React.Component {
-    formRef = React.createRef();
-    
+  formRef = React.createRef();
+
   constructor(props) {
     super(props);
     this.state = {
       patient: []
-      }
-      
     }
-    
+
+  }
+
 
   handleChange = (e) => {
     this.setState({ patient: e.target.value });
@@ -37,110 +37,116 @@ class EditPatientComponent extends React.Component {
     this.getData();
   }
 
-    getData() {
-      
-        const patentID = this.props.match.params.id;
-        
-        axios
-          .get("/patent/id", { params: { patentID } })
-          .then((res) => {
-            this.state.patient = res.data;
-            this.setFormValue(res.data[0]);
+  getData() {
 
-            // console.log(res.data)
-          })
-          .catch((err) => {
-            console.error(err);
-            // window.location = "/patent";
-          });
+    const patentID = this.props.match.params.id;
+
+    axios
+      .get("/patent/id", { params: { patentID } })
+      .then((res) => {
+        this.state.patient = res.data;
+        this.setFormValue(res.data[0]);
+
+        // console.log(res.data)
+      })
+      .catch((err) => {
+        console.error(err);
+        // window.location = "/patent";
+      });
 
   }
   setFormValue(data) {
     this.formRef.current.setFieldsValue({
-        name: data.name ? data.name : "",
-        dob: data.dob ? data.dob : " ",
-        email: data.email ? data.email: " ",
-        tel: data.tel ? data.tel : ""
-      
-    })
-     }
+      name: data.name ? data.name : "",
+      // dob: data.dob ? data.dob : " ",
+      email: data.email ? data.email : " ",
+      tel: data.tel ? data.tel : "",
+      job: data.job ? data.job : ""
 
-    saveFormData() {
-    
+    })
+  }
+
+  saveFormData() {
+
+  }
+
+  render() {
+
+    const layout = {
+      labelCol: {
+        span: 8,
+      },
+      wrapperCol: {
+        span: 8,
+      },
+    };
+
+    const validateMessages = {
+      required: '${label} is required!',
+      types: {
+        email: '${label} is not a valid email!',
+        number: '${label} is not a valid number!',
+      },
+      number: {
+        range: '${label} must be between ${min} and ${max}',
+      },
+    };
+
+    const onFinish = (values) => {
+      console.log(values)
+      const patentID = this.props.match.params.id
+
+      console.log(typeof (values.dob))
+
+      const data = {
+        patentID: patentID,
+        name: values.name,
+        dob: values.dob,
+        email: values.email,
+        tel: values.tel,
+        job: values.job
+      }
+
+      console.log(data)
+      axios.put('patent/id', data).then(res => {
+        if (res.status === 200) {
+          Toast.fire({
+            icon: 'success',
+            title: 'Update success'
+          }).then(() => {
+            window.location = "/patient";
+          })
+
+        } else {
+          Toast.fire({
+            icon: 'error',
+            title: 'Fail to update'
+          })
+        }
+
+        console.log(res.status)
+      })
     }
 
-        render() {
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+      }
+    })
 
-            const layout = {
-            labelCol: {
-                span: 8,
-            },
-            wrapperCol: {
-                span: 8,
-            },
-        };
-            
-        const validateMessages = {
-            required: '${label} is required!',
-            types: {
-                email: '${label} is not a valid email!',
-                number: '${label} is not a valid number!',
-            },
-            number: {
-                range: '${label} must be between ${min} and ${max}',
-            },
-        };
-        
-         const onFinish = (values) => {
-            const staffID = this.state.staff[0]._id
 
-            const data = {
-                staffID: staffID,
-                name: values.name,
-                dob: values.dob,
-                email: values.email,
-                tel: values.tel
-            }
-            console.log(data)
-            axios.put('patent/id', data).then(res => {
-                if (res.status === 200) {
-                    Toast.fire({
-                        icon: 'success',
-                        title: 'Update success'
-                    }).then(() => {
-                        window.location = "/patent";
-                    })
 
-                } else {
-                    Toast.fire({
-                        icon: 'error',
-                        title: 'Fail to update'
-                    })
-                }
-
-                console.log(res.status)
-            })
-         };
-            
-        const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-        })
-
-    
-            
 
     return (
       <div className="touch">
         <Card title="Edit" className="card" bordered={true}>
-          {/* <h1>{this.state.staff[0]}</h1> */}
+
           <Form
             {...layout}
             ref={this.formRef}
@@ -159,6 +165,7 @@ class EditPatientComponent extends React.Component {
             >
               <Input />
             </Form.Item>
+
             <Form.Item
               name="dob"
               label="dob"
@@ -168,11 +175,9 @@ class EditPatientComponent extends React.Component {
                 },
               ]}
             >
-             <Space direction="vertical" size={12}>
-            <DatePicker defaultValue={moment('2015/01/01', dateFormat)} format={dateFormat} />
-             </Space>
+              <DatePicker />
             </Form.Item>
-                    
+
             <Form.Item
               name="tel"
               label="tel"
@@ -195,6 +200,17 @@ class EditPatientComponent extends React.Component {
             >
               <Input />
             </Form.Item>
+            <Form.Item
+              name="job"
+              label="JOB"
+              rules={[
+                {
+                  required: true,
+                },
+              ]}
+            >
+              <Input />
+            </Form.Item>
             <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
               <Button type="primary" htmlType="submit">
                 Save
@@ -204,7 +220,7 @@ class EditPatientComponent extends React.Component {
         </Card>
       </div>
     );
-    }
+  }
 }
 
 

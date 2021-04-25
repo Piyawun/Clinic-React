@@ -28,7 +28,7 @@ class PatientComponent extends React.Component {
         key: row._id,
         staffID: row._id,
         name: row.name,
-        dob: row.dob,
+        dob: new Date(row.dob['$date']).toLocaleDateString('th-TH'),
         email: row.email,
         tel: row.tel
       }))

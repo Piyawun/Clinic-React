@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, Form, Input, Button,DatePicker } from 'antd';
+import { Card, Form, Input, Button, DatePicker } from 'antd';
 import axios from 'axios';
 
 
@@ -118,7 +118,7 @@ class AddPatientComponent extends React.Component {
                                 {
                                     required: true,
                                 },
-                                {type:'email'}
+                                { type: 'email' }
                             ]}
                         >
                             <Input />
