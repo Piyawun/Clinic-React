@@ -52,7 +52,6 @@ class AddUserComponent extends React.Component {
                         title: 'Fail to add user please check again'
                     })
                 }
-                console.log(res)
             })
         };
 
