@@ -9,6 +9,7 @@ import Swal from 'sweetalert2/dist/sweetalert2.all.min'
 import 'sweetalert2/dist/sweetalert2.min'
 
 class DoctorComponent extends React.Component {
+
     constructor(props) {
         super(props)
         this.state = {
@@ -57,8 +58,8 @@ class DoctorComponent extends React.Component {
                 icon: 'question',
                 title: 'ยืนยันการรับเคส ',
                 showCancelButton: true,
-                confirmButtonText: `Save`,
-                denyButtonText: `Don't save`,
+                confirmButtonText: `Access`,
+                denyButtonText: `Don't access`,
             }).then((result) => {
                 /* Read more about isConfirmed, isDenied below */
                 if (result.isConfirmed) {
@@ -71,7 +72,7 @@ class DoctorComponent extends React.Component {
                                 icon: 'success',
                                 title: 'Access success'
                             }).then(() => {
-                                window.location = "/doctor";
+                                window.location = "/doctor/process/" + data.bookingID;
                             })
                         })
                         .catch(err => {
