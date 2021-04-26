@@ -29,8 +29,8 @@ class ViewReportPatientComponent extends React.Component {
         const columns = [
             {
                 title: 'BookingID',
-                dataIndex: 'bookingID',
-                key: 'bookingID',
+                dataIndex: '_id',
+                key: '_id',
                 width: '20px',
                 render: text => <a>{text}</a>,
             },
@@ -57,7 +57,7 @@ class ViewReportPatientComponent extends React.Component {
 
                     <Space size="middle">
 
-                        <Link to={{ pathname: `/patient/report/${record.staffID}`, query: "/report" }} >
+                        <Link to={{ pathname: `/patient/report/${record._id}`, query: "/report" }} >
                             <Button type="primary">
                                 View more detail </Button>
                         </Link>

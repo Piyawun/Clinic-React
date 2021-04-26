@@ -7,26 +7,30 @@ import Sidebar from './pages/SidebarComponent';
 
 import Home from './pages/Home'
 import Login from './authentication/login'
-import PatientComponent from './pages/patient/Patient'
-import PaymentComponent from './pages/payment/Payment'
-import MedicineComponent from './pages/medicine/Medicine'
-import MedicineDetailComponent from './pages/medicine/MedicineDetail'
 
 import DoctorComponent from './pages/doctor/Doctor'
 // import DoctorReportComponent from './pages/doctor/DoctorReport'
-import PaymentDetailComponent from './pages/payment/PaymentDetail'
 import ProcessComponent from './pages/doctor/ProcessComponent'
+import DoctorDispenseComponent from './pages/doctor/DoctorDispenseComponent';
 
 import UserComponent from './pages/user/UserComponent'
 import UserEditComponent from './pages/user/UserEditComponent'
 import AddUserComponent from './pages/user/AddUserComponent'
+
 import AddMedicineComponent from './pages/medicine/AddMedicineComponent';
 import ViewMedicine from './pages/medicine/ViewMedicine';
+import MedicineComponent from './pages/medicine/Medicine'
+import MedicineDetailComponent from './pages/medicine/MedicineDetail'
+
 import AddPatientComponent from './pages/patient/AddPatientComponent';
 import ViewReportPatientComponent from './pages/patient/ViewReportPatientComponent';
 import EditPatientComponent from './pages/patient/EditPatientComponent';
-import DoctorDispenseComponent from './pages/doctor/DoctorDispenseComponent';
+import PatientComponent from './pages/patient/Patient'
+import ViewReportDetailComponent from './pages/patient/ViewReportDetailComponent'
+
+import PaymentDetailComponent from './pages/payment/PaymentDetail'
 import AddOrderPaymentComponent from './pages/payment/AddOrderPaymentComponent';
+import PaymentComponent from './pages/payment/Payment'
 
 const isLogin = () => {
     if (localStorage.getItem("accessToken")) {
@@ -73,7 +77,7 @@ const RoutesApp = () => {
             <PrivateRoute exact path="/patient/add" component={AddPatientComponent}></PrivateRoute>
             <PrivateRoute exact path="/patient/view-report/:id" component={ViewReportPatientComponent}></PrivateRoute>
             <PrivateRoute exact path="/patient/edit/:id" component={EditPatientComponent}></PrivateRoute>
-            <PrivateRoute exact path="/patient/report/:id" component={ViewReportPatientComponent}></PrivateRoute>
+            <PrivateRoute exact path="/patient/report/:id" component={ViewReportDetailComponent}></PrivateRoute>
                 
             <PrivateRoute exact path="/doctor" component={DoctorComponent}></PrivateRoute>
             {/* <PrivateRoute exact path="/doctor/report/:id" component={DoctorReportComponent}></PrivateRoute> */}
