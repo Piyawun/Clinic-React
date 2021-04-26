@@ -57,7 +57,7 @@ class payment extends React.Component {
         })
 
         this.setState({ orderList: report })
-        console.log(this.state.orderList)
+        // console.log(this.state.orderList)
 
       }).catch(err => {
         console.log(err)

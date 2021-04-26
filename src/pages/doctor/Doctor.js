@@ -137,7 +137,6 @@ class DoctorComponent extends React.Component {
             },
         ];
 
-        console.log(this.state.patientWait)
 
 
 

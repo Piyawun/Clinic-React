@@ -93,10 +93,10 @@ class EditPatientComponent extends React.Component {
     };
 
     const onFinish = (values) => {
-      console.log(values)
+      // console.log(values)
       const patentID = this.props.match.params.id
 
-      console.log(typeof (values.dob))
+      // console.log(typeof (values.dob))
 
       const data = {
         patentID: patentID,
@@ -107,7 +107,7 @@ class EditPatientComponent extends React.Component {
         job: values.job
       }
 
-      console.log(data)
+      // console.log(data)
       axios.put('patent/id', data).then(res => {
         if (res.status === 200) {
           Toast.fire({
@@ -124,7 +124,7 @@ class EditPatientComponent extends React.Component {
           })
         }
 
-        console.log(res.status)
+        // console.log(res.status)
       })
     }
 

@@ -85,7 +85,7 @@ class UserEditComponent extends React.Component {
                 name: values.name,
                 role: values.role
             }
-            console.log(data)
+            // console.log(data)
             axios.put('user/id', data).then(res => {
                 if (res.status === 200) {
                     Toast.fire({
@@ -102,7 +102,7 @@ class UserEditComponent extends React.Component {
                     })
                 }
 
-                console.log(res.status)
+                // console.log(res.status)
             })
         };
 

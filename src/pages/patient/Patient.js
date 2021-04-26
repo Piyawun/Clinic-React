@@ -32,7 +32,7 @@ class PatientComponent extends React.Component {
         email: row.email,
         tel: row.tel
       }))
-      console.log(data)
+      // console.log(data)
       this.setState({ patient: data })
     }).catch(err => {
       console.error(err)
@@ -102,7 +102,7 @@ class PatientComponent extends React.Component {
 
     const data = this.state.patient
     const onSearch = (values) => {
-      console.log(values)
+      // console.log(values)
     }
 
     const state = {

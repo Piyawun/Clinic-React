@@ -55,7 +55,7 @@ class Home extends React.Component {
         }))
 
         this.setState({ bookingList: bookingList });
-        console.log(bookingList)
+        // console.log(bookingList)
       })
       .catch(err => {
         console.log(err)
@@ -100,7 +100,7 @@ class Home extends React.Component {
     };
 
     const onFinish = (values) => {
-      console.log(values.booking)
+      // console.log(values.booking)
       const data = {
         "staffID": localStorage.getItem('staffID'),
         "patentID": values.booking.patentID,

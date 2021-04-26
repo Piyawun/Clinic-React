@@ -22,7 +22,7 @@ class MedicineComponent extends React.Component {
     const response = await axios.get('/dispense')
     if (response.status == 200) {
       this.setState({ dispense: response.data })
-      // console.log(this.state.dispense)
+
     }
 
   }
@@ -32,7 +32,7 @@ class MedicineComponent extends React.Component {
 
 
     const data = this.state.dispense
-    console.log(data)
+
     const columns = [
       {
         title: "report ID",
@@ -50,7 +50,7 @@ class MedicineComponent extends React.Component {
         render: (text, record) => (
 
           <Space size="middle">
-            {console.log(record)}
+ 
             <Link to={{ pathname: `/medicine/detail/${record}`, query: "/medicine/detail/" }} >
               <Button type="primary">
                 รายละเอียด </Button>

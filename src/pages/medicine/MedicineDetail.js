@@ -61,7 +61,7 @@ class MedicineDetailComponent extends React.Component {
           'จ่ายยาสำเร็จ',
           'success'
         )
-        window.location = '/medicine/detail/'+ this.state.id
+        window.location = '/medicine/detail/' + this.state.id
       }).catch(err => {
         console.log(err)
       })

@@ -26,7 +26,7 @@ class ViewReportDetailComponent extends React.Component {
         this.setState({ medicine: responseReport.data['dispenses'] })
         this.setState({ order: responseReport.data['orders'] })
         this.setState({ patient: responseReport.data['patient'] })
-        console.log(this.state.medicine)
+        // console.log(this.state.medicine)
     }
 
     render() {

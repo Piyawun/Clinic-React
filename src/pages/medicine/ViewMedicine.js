@@ -1,7 +1,7 @@
 import React from 'react'
 
-import {Link} from 'react-router-dom'
-import { Card, Table,Button,Space } from "antd";
+import { Link } from 'react-router-dom'
+import { Card, Table, Button, Space } from "antd";
 import axios from 'axios';
 
 
@@ -31,7 +31,7 @@ class ViewMedicine extends React.Component {
                 price: row.price
             }))
             this.setState({ medicine: data })
-            console.log(res)
+  
         }).catch(err => {
             console.error(err)
         })
@@ -81,13 +81,28 @@ class ViewMedicine extends React.Component {
                 dataIndex: 'price',
                 key: 'price',
                 style: { textAlign: 'center' }
-            }
+            },
+            {
+                title: 'Action',
+                key: 'action',
+                render: (text, record) => (
 
+                    <Space size="middle">
+       
+                        <Link to={{ pathname: `/medicine/update/${record.key}`, query: "/medicine/update" }} >
+                            <Button type="primary">
+                                เพิ่มจำนวนยา </Button>
+                        </Link>
+
+
+                    </Space>
+                ),
+            },
         ]
 
         const data = this.state.medicine
 
-        console.log(data)
+
         const state = {
             bottom: 'bottomCenter',
         };

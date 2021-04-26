@@ -115,7 +115,7 @@ class DoctorDispenseComponent extends React.Component {
                 price: row.price
             }))
             this.setState({ medicine: data })
-            console.log(res.data)
+
         }).catch(err => {
             console.error(err)
         })
@@ -126,7 +126,7 @@ class DoctorDispenseComponent extends React.Component {
         const data = this.state.medicine
 
         const onFinish = values => {
-            console.log(values);
+
             const data = {
                 'reportID': this.props.match.params.id,
                 'meds_ref': values.meds_ref
@@ -134,17 +134,13 @@ class DoctorDispenseComponent extends React.Component {
 
             axios.post('/dispense', data)
                 .then(res => {
-                    if (res.status === 200) {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'เพิ่มการสั่งยาสำเร็จ',
-                            text:"reportID : "+ this.props.match.params.id,
-                        }).then(() => {
-                            window.location = '/doctor'
-                        })
-                    } else {
-
-                    }
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'เพิ่มการสั่งยาสำเร็จ',
+                        text: "reportID : " + this.props.match.params.id,
+                    }).then(() => {
+                        window.location = '/doctor'
+                    })
                 }).catch(err => {
                     console.log(err)
                 })

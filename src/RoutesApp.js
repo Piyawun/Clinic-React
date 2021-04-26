@@ -31,6 +31,7 @@ import ViewReportDetailComponent from './pages/patient/ViewReportDetailComponent
 import PaymentDetailComponent from './pages/payment/PaymentDetail'
 import AddOrderPaymentComponent from './pages/payment/AddOrderPaymentComponent';
 import PaymentComponent from './pages/payment/Payment'
+import MedicineUpdateComponent from './pages/medicine/MedicineUpdateComponent';
 
 const isLogin = () => {
     if (localStorage.getItem("accessToken")) {
@@ -96,6 +97,7 @@ const RoutesApp = () => {
             <PrivateRoute exact path="/medicine/detail/:id" component={MedicineDetailComponent}></PrivateRoute>
             <PrivateRoute exact path="/medicine/add" component={AddMedicineComponent}></PrivateRoute>
             <PrivateRoute exact path="/medicine/view" component={ViewMedicine}></PrivateRoute>
+            <PrivateRoute exact path="/medicine/update/:id" component={MedicineUpdateComponent}></PrivateRoute>
 
         </Switch>
     )

@@ -32,7 +32,7 @@ class AddMedicineComponent extends React.Component {
         };
 
         const onFinish = (values) => {
-            console.log(values)
+   
             axios.post('medicine', values.medicine).then(res => {
                 if (res.status === 201) {
                     Toast.fire({
@@ -47,7 +47,7 @@ class AddMedicineComponent extends React.Component {
                         title: 'Fail to add medicine please check again'
                     })
                 }
-                console.log(res)
+
             })
         };
 

@@ -39,7 +39,7 @@ class UserComponent extends React.Component {
     }
 
     onClickDelete = (id) => {
-        console.log(id)
+        // console.log(id)
         Swal.fire({
             title: "Confirm to delete",
             text: "Are you sure you want to delete",
@@ -126,7 +126,7 @@ class UserComponent extends React.Component {
 
         const data = this.state.staff
 
-        console.log(data)
+        // console.log(data)
 
         const state = {
             bottom: 'bottomCenter',

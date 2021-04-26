@@ -29,7 +29,7 @@ class PaymentDetailComponent extends React.Component {
       'reportID': this.state.id
     }
     const response = await axios.put('/payments/id', sendData)
-    console.log(response)
+    // console.log(response)
     if (response.status == 200) {
       Swal.fire(
         'สำเร็จ!',
@@ -73,7 +73,7 @@ class PaymentDetailComponent extends React.Component {
     this.setState({ order: ordMerged })
     this.setState({ data: data })
     this.setState({ user: user })
-    if (this.state.status === "กำลังรอชำระเงิน") {
+    if (paymentResponse.data['bill'][0].status == "รอชำระเงิน") {
       this.setState({color:"error"})
     } else {
       this.setState({ color: "green" })
@@ -91,7 +91,7 @@ class PaymentDetailComponent extends React.Component {
     let data = this.state.order
     let user = this.state.user
 
-    console.log(dataOrder)
+    // console.log(dataOrder)
 
     const columnsMed = [
       {
@@ -162,7 +162,7 @@ class PaymentDetailComponent extends React.Component {
 
     const createBill = () => {
       const asd = this.props.match.params.id
-      console.log(asd)
+      // console.log(asd)
       axios.post('/payments', { reportID: reportID })
         .then(res => {
           if (res.status == 200) {
@@ -213,7 +213,7 @@ class PaymentDetailComponent extends React.Component {
                 <p>วันเกิด : {this.state.user.dob}</p>
                 <p>อีเมล : {this.state.user.email}</p>
                 <p>เบอร์โทรศัพท์ : {this.state.user.tel}</p>
-                {console.log(this.state.user)}
+                {/* {console.log(this.state.user)} */}
                 <hr></hr>
                 <h1>รวมค่าใช้จ่ายทั้งสิ้น : <span style={{ color: 'red' }}>{this.state.data.price}</span></h1>
                 

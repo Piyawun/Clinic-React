@@ -53,9 +53,9 @@ class AddPatientComponent extends React.Component {
                         title: 'Fail to add patient please check again'
                     })
                 }
-                console.log(res)
+           
             })
-            console.log(values.patient)
+           
         };
 
         const Toast = Swal.mixin({
