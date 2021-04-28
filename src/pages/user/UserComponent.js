@@ -113,8 +113,8 @@ class UserComponent extends React.Component {
                             <Button type="primary">
                                 Edit </Button>
                         </Link>
-                        <Button type="text" onClick={() => { this.onClickDelete(`${record.staffID}`) }} style={{ backgroundColor: '#f5222d', color: 'white' }}>
-                            Delete </Button>
+                        {/* <Button type="text" onClick={() => { this.onClickDelete(`${record.staffID}`) }} style={{ backgroundColor: '#f5222d', color: 'white' }}>
+                            Delete </Button> */}
 
 
                     </Space>
