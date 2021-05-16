@@ -24,7 +24,7 @@ class PatientComponent extends React.Component {
   getData() {
     axios.get('/patent').then(res => {
 
-      const data = res.data.map(row => ({
+      const data = res.data.data.map(row => ({
         key: row._id,
         staffID: row._id,
         name: row.name,
@@ -113,40 +113,43 @@ class PatientComponent extends React.Component {
         <Card className="card" title="รายชื่อผู้ป่วย" bordered={true}>
           <Row>
             <Col
-              style={{ padding: "15px" }}
+              // style={{ padding: "15px" }}
               xs={24}
-              sm={24}
-              md={24}
-              lg={24}
-              xl={16}
+              sm={14}
+              md={9}
+              lg={5}
+              xl={4}
             >
-              <Space>
-                <Button type="primary">
-                  <Link to={'/patient/add'}>
-                    เพิ่มผู้ป่วย
-                  </Link>
-                </Button>
+              {/* <div style={{backgroundColor:'red'}}>
 
-              </Space>
+              </div> */}
+              <Button type="primary" block="true">
+                <Link to={'/patient/add'}>
+                  เพิ่มผู้ป่วย
+                </Link>
+              </Button>
             </Col>
 
-            <Col style={{ padding: "10px" }} xs={24} sm={24} md={24} lg={24} xl={8}>
-              <Search placeholder="Search with telephone number" onSearch={onSearch} style={{ width: 250 }} />
+            
+          </Row>
 
+          <Row>
+            <Col style={{ paddingTop: 15,paddingBottom: 15 }} xs={24} sm={24} md={24} lg={24} xl={8}>
+              <Search placeholder="Search with telephone number" onSearch={onSearch} style={{ width: 250 }} />
             </Col>
           </Row>
 
-          <Row gutter={16}>
-            <Col span={24}>
-              <div className="touch">
-                <Table
-                  columns={columns}
-                  dataSource={data}
-                  size="small"
-                  pagination={{
-                    position: [state.bottom]
-                  }} />
-              </div>
+          <Row gutter={8}>
+            <Col span={24} xs={24} sm={24} md={24} lg={24} xl={24}>
+              <Table
+                columns={columns}
+                dataSource={data}
+                size="small"
+                pagination={{
+                  position: [state.bottom]
+                }}
+                style={{ minWidth: 300 }}
+              />
             </Col>
           </Row>
         </Card>

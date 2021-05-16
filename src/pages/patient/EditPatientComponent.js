@@ -44,8 +44,8 @@ class EditPatientComponent extends React.Component {
     axios
       .get("/patent/id", { params: { patentID } })
       .then((res) => {
-        this.state.patient = res.data;
-        this.setFormValue(res.data[0]);
+        this.state.patient = res.data.data;
+        this.setFormValue(res.data.data[0]);
 
         // console.log(res.data)
       })

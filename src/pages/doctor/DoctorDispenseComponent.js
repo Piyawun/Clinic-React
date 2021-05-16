@@ -104,7 +104,7 @@ class DoctorDispenseComponent extends React.Component {
 
     getData() {
         axios.get('/medicine').then(res => {
-            const data = res.data.map(row => ({
+            const data = res.data.data.map(row => ({
                 key: row._id,
                 medID: row._id,
                 name: row.name,

@@ -2,6 +2,9 @@ import React from 'react';
 import { Table, Card, Col, Row, Tag } from 'antd';
 
 import axios from 'axios'
+import Moment from 'react-moment';
+import moment from 'moment';
+
 class ViewReportDetailComponent extends React.Component {
 
     constructor(props) {
@@ -22,10 +25,10 @@ class ViewReportDetailComponent extends React.Component {
         const reportID = this.props.match.params.id
         const responseReport = await axios.get('/report/id', { params: { reportID: reportID } })
 
-        this.setState({ report: responseReport.data['report'] })
-        this.setState({ medicine: responseReport.data['dispenses'] })
-        this.setState({ order: responseReport.data['orders'] })
-        this.setState({ patient: responseReport.data['patient'] })
+        this.setState({ report: responseReport.data.data['report'] })
+        this.setState({ medicine: responseReport.data.data['dispenses'] })
+        this.setState({ order: responseReport.data.data['orders'] })
+        this.setState({ patient: responseReport.data.data['patient'] })
         // console.log(this.state.medicine)
     }
 
@@ -88,7 +91,8 @@ class ViewReportDetailComponent extends React.Component {
 
                             <h1>User ID : {this.state.patient._id} </h1>
                             <h1>ชื่อ : {this.state.patient.name} </h1>
-                            <h1>DOB : {this.state.patient.dob} </h1>
+                            <h1>วันเกิด : <Moment date={this.state.patient.dob} format="D/MM/YYYY" /> </h1>
+                            <p>อายุ : {moment(this.state.patient.dob, "YYYMMDD").fromNow().replace("ago", " ")}</p>
                             <h1>job : {this.state.patient.job} </h1>
                             <h1>tel : {this.state.patient.tel} </h1>
 
@@ -105,6 +109,7 @@ class ViewReportDetailComponent extends React.Component {
                             <br></br>
                             <br></br>
                             <br></br>
+                            <br></br>
 
                         </Card>
                     </div>
@@ -113,7 +118,7 @@ class ViewReportDetailComponent extends React.Component {
                 <Col xs={24} sm={24} md={12} xl={12} lg={12} style={{ padding: '10px' }}>
                     <div className='touch'>
                         <Card className='card' title="รายละเอียดการจ่ายยา">
-                            <Table columns={columnsMed} dataSource={dataMed} pagination={false}
+                            <Table columns={columnsMed} dataSource={dataMed} pagination={false} style={{ minWidth: 300 }}
                             />
                         </Card>
                     </div>
@@ -123,7 +128,7 @@ class ViewReportDetailComponent extends React.Component {
                     <div className='touch'>
                         <Card className='card' title="ค่าใช้จ่ายเพิ่มเติม">
                             <Table columns={columnsOrder} dataSource={dataOrder} pagination={false}
-                            />
+                                style={{ minWidth: 300 }}/>
                         </Card>
                     </div>
                 </Col>

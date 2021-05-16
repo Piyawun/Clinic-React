@@ -3,7 +3,8 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { Card, Table, Button, Space } from "antd";
 import axios from 'axios';
-
+import Moment from 'react-moment';
+import moment from 'moment';
 
 class ViewMedicine extends React.Component {
 
@@ -20,7 +21,7 @@ class ViewMedicine extends React.Component {
 
     getData() {
         axios.get('/medicine').then(res => {
-            const data = res.data.map(row => ({
+            const data = res.data.data.map(row => ({
                 key: row._id,
                 medID: row._id,
                 name: row.name,
@@ -68,13 +69,20 @@ class ViewMedicine extends React.Component {
                 title: 'MFG',
                 dataIndex: 'MFG',
                 key: 'MFG',
-                style: { textAlign: 'center' }
+                style: { textAlign: 'center' },
+                render: (text, record) => (
+                    < Moment date={record.MFG} format="DD/MM/YYYY" />
+                    
+                )
             },
             {
                 title: 'EXP',
                 dataIndex: 'EXP',
                 key: 'EXP',
-                style: { textAlign: 'center' }
+                style: { textAlign: 'center' },
+                render: (text, record) => (
+                    moment(record.EXP).format("DD/MM/YYYY")
+                )
             },
             {
                 title: 'PRICE',

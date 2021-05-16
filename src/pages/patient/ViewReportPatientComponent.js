@@ -4,6 +4,8 @@ import { Table, Row, Col, Card, Space, Button } from 'antd';
 
 import {Link} from 'react-router-dom'
 import axios from 'axios'
+import Moment from 'react-moment';
+
 class ViewReportPatientComponent extends React.Component {
 
     constructor(props) {
@@ -19,7 +21,7 @@ class ViewReportPatientComponent extends React.Component {
     async getData() {
         const response = await axios.get('/report/patient', { params: { patientID: this.state.id } })
 
-        this.setState({ data: response.data })
+        this.setState({ data: response.data.data })
     }
     render() {
 

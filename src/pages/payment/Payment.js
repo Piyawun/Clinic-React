@@ -46,7 +46,7 @@ class payment extends React.Component {
   getData() {
     axios.get('orders')
       .then(res => {
-        const data = res.data
+        const data = res.data.data
         const report = []
         data.map(x => {
           const id = {

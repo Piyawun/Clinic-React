@@ -23,7 +23,7 @@ class UserComponent extends React.Component {
     getData() {
         axios.get('/user').then(res => {
 
-            const data = res.data.map(row => ({
+            const data = res.data.data.map(row => ({
                 key: row._id,
                 staffID: row._id,
                 username: row.username,

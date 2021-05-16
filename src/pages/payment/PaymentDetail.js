@@ -4,6 +4,8 @@ import { Button } from "antd";
 
 import axios from 'axios'
 import Swal from "sweetalert2";
+import Moment from 'react-moment';
+import moment from 'moment';
 
 
 class PaymentDetailComponent extends React.Component {
@@ -54,26 +56,26 @@ class PaymentDetailComponent extends React.Component {
     const reportID = this.props.match.params.id
     const paymentResponse = await axios.get('/payments/id', { params: { reportID } })
     const reportResponse = await axios.get('/report/id', { params: { reportID } })
+    const user = reportResponse.data.data.patient
+    console.log(user)
 
-    const user = reportResponse.data.patient
-
-    const med = paymentResponse.data['bill'][0]?.objMed
-    const ord = paymentResponse.data['bill'][0]?.objOrder
+    const med = paymentResponse.data.data['bill'][0]?.objMed
+    const ord = paymentResponse.data.data['bill'][0]?.objOrder
 
     let medMerged = [].concat.apply([], med)
     let ordMerged = [].concat.apply([], ord)
 
     const data = {
-      'price': paymentResponse.data['bill'][0].price,
-      'status': paymentResponse.data['bill'][0].status,
-      'reportID': paymentResponse.data['bill'][0].reportID
+      'price': paymentResponse.data.data['bill'][0].price,
+      'status': paymentResponse.data.data['bill'][0].status,
+      'reportID': paymentResponse.data.data['bill'][0].reportID
     }
 
     this.setState({ medicine: medMerged })
     this.setState({ order: ordMerged })
     this.setState({ data: data })
     this.setState({ user: user })
-    if (paymentResponse.data['bill'][0].status == "รอชำระเงิน") {
+    if (paymentResponse.data.data['bill'][0].status == "รอชำระเงิน") {
       this.setState({color:"error"})
     } else {
       this.setState({ color: "green" })
@@ -198,9 +200,9 @@ class PaymentDetailComponent extends React.Component {
 
             <div className="touch">
               <Card className="card" title="รายละเอียด" bordered={true} style={{ marginRight: '10px' }}>
-                <Table columns={columnsMed} dataSource={dataMed} size="small" />
+                <Table columns={columnsMed} dataSource={dataMed} size="small" pagination={false}/>
                 <hr></hr>
-                <Table columns={columnsOrder} dataSource={dataOrder} size="small" />
+                <Table columns={columnsOrder} dataSource={dataOrder} size="small" pagination={false}/>
               </Card>
             </div>
           </Col>
@@ -210,7 +212,9 @@ class PaymentDetailComponent extends React.Component {
             <div className="touch">
               <Card className="card" title="ใบเสร็จ" bordered={true} style={{ marginLeft: '10px' }}>
                 <p>ชื่อ : {this.state.user.name}</p>
-                <p>วันเกิด : {this.state.user.dob}</p>
+                <p>วันเกิด : <Moment date={this.state.user.dob} format="D/MM/YYYY"></Moment></p>
+                <p>อายุ : {moment(this.state.user.dob, "YYYMMDD").fromNow().replace("ago", " ")}</p>
+
                 <p>อีเมล : {this.state.user.email}</p>
                 <p>เบอร์โทรศัพท์ : {this.state.user.tel}</p>
                 {/* {console.log(this.state.user)} */}

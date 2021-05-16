@@ -24,8 +24,8 @@ class DoctorComponent extends React.Component {
     getData() {
         axios.get('booking')
             .then(res => {
-                const waitingList = res.data.filter(row => {
-                    if (row.status == "กำลังรอคิว") {
+                const waitingList = res.data.data.filter(row => {
+                    if (row.status == "กำลังรอคิว" || row.status == "กำลังตรวจ") {
                         const data = {
                             key: row._id,
                             bookingID: row._id,
@@ -149,6 +149,7 @@ class DoctorComponent extends React.Component {
                         <div className="touch">
                             <Card className="card" title="จำนวนคิว" bordered={true}>
                                 <Table
+                                    style={{minWidth:300}}
                                     columns={columns}
                                     pagination={{ position: [this.state.bottom] }}
                                     dataSource={this.state.patientWait}

@@ -30,8 +30,8 @@ class UserEditComponent extends React.Component {
         const staffID = this.props.match.params.id
         axios.get('/user/id', { params: { staffID } })
             .then(res => {
-                this.state.staff = res.data
-                this.setFormValue(res.data[0])
+                this.state.staff = res.data.data
+                this.setFormValue(res.data.data[0])
                 // console.log(res.data)
                 
             }).catch(err => {

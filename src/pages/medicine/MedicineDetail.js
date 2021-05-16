@@ -2,6 +2,8 @@ import React from "react";
 import { AudioOutlined } from "@ant-design/icons";
 import { Router, Link } from "react-router-dom";
 import { Card, Col, Row, Button, Modal, Space, Search, Input, Table, Tag } from "antd";
+import Moment from 'react-moment';
+import moment from 'moment';
 
 import axios from 'axios'
 import Swal from "sweetalert2";
@@ -28,7 +30,7 @@ class MedicineDetailComponent extends React.Component {
     if (responseMedicine.status == 200) {
 
       const data = []
-      responseMedicine.data.map(value => {
+      responseMedicine.data.data.map(value => {
         const x = {
           'reportID': value['reportID'],
           'id': value['_id'],
@@ -38,8 +40,8 @@ class MedicineDetailComponent extends React.Component {
         data.push(x)
       })
       this.setState({ medicine: data })
-      this.setState({ patient: responseReport.data['patient'] })
-      this.setState({ status: responseMedicine.data[0]?.status })
+      this.setState({ patient: responseReport.data.data['patient'] })
+      this.setState({ status: responseMedicine.data.data[0]?.status })
       if (this.state.status === "รอรับยา") {
         this.setState({ color: "warning" })
       } else {
@@ -104,7 +106,7 @@ class MedicineDetailComponent extends React.Component {
 
             <div className="touch">
               <Card className="card" title="รายละเอียด" bordered={true} style={{ marginRight: '10px' }}>
-                <Table columns={columns} dataSource={data} size="small" />
+                <Table columns={columns} dataSource={data} size="small" pagination={false}/>
                 <hr></hr>
               </Card>
             </div>
@@ -115,7 +117,8 @@ class MedicineDetailComponent extends React.Component {
             <div className="touch">
               <Card className="card" title="ข้อมูลผู้ป่วย" bordered={true} style={{ marginLeft: '10px' }}>
                 <p>ชื่อ : {this.state.patient.name}</p>
-                <p>วันเกิด : {this.state.patient.dob}</p>
+                <p>วันเกิด : <Moment date={this.state.patient.dob} format="D/MM/YYYY"></Moment></p>
+                <p>อายุ : {moment(this.state.patient.dob, "YYYMMDD").fromNow().replace("ago", " ")}</p>
                 <p>อีเมล : {this.state.patient.email}</p>
                 <p>เบอร์โทรศัพท์ : {this.state.patient.tel}</p>
                 <hr></hr>

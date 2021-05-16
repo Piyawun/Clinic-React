@@ -21,7 +21,7 @@ class MedicineComponent extends React.Component {
 
     const response = await axios.get('/dispense')
     if (response.status == 200) {
-      this.setState({ dispense: response.data })
+      this.setState({ dispense: response.data.data })
 
     }
 
@@ -64,10 +64,10 @@ class MedicineComponent extends React.Component {
     return (
       <>
         <Row>
-          <Col style={{ padding: "10px" }} xs={24} sm={24} md={24} lg={24} xl={8}>
-            <div className="touch">
+          <Col style={{ padding: "10px" }} xs={24} sm={24} md={24} lg={24} xl={24}>
+            <div className="touch" >
               <Card className="card" title="ใบสั่งยา" bordered={true}>
-                <Table columns={columns} dataSource={data} size="middle" />
+                <Table columns={columns} dataSource={data} size="middle" style={{ minWidth: 300 }}/>
               </Card>
             </div>
           </Col>

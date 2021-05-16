@@ -45,7 +45,7 @@ class Home extends React.Component {
   getData() {
     axios.get('booking',)
       .then(res => {
-        const bookingList = res.data.map(row => ({
+        const bookingList = res.data.data.map(row => ({
           key: row._id,
           bookingID: row._id,
           patentID: row.patentID,
@@ -162,7 +162,7 @@ class Home extends React.Component {
         title: 'Status',
         dataIndex: 'status',
         key: 'status',
-        responsive: ['md'],
+        responsive: ['md','xs','sm'],
         render: text => <Tag color={text == 'ตรวจเสร็จสิ้น' ? 'green' : 'yellow'}>{text}</Tag>
       },
     ];
@@ -225,14 +225,15 @@ class Home extends React.Component {
         <Row >
           <Col style={{ padding: "2px" }} xs={24} sm={24} md={24} lg={24} xl={24}>
             <div className="touch">
-              <Button style={{ margin: "10px", backgroundColor: "#f759ab", color: "white" }} onClick={() => this.showModal()} type="text"  size="small" icon={<PlusOutlined />} >เพิ่มนัด</Button>
-              <Card className="card" title="จำนวนคิว" bordered={true}>
+              <Card className="card" title="จำนวนคิว" bordered={true} >
+                <Button style={{ margin: "10px", backgroundColor: "#f759ab", color: "white" }} onClick={() => this.showModal()} type="text" size="small" icon={<PlusOutlined />} >เพิ่มนัด</Button>
 
                 <Table
                   columns={columns}
                   pagination={{ position: [this.state.bottom] }}
                   dataSource={data}
                   size='small'
+                  style={{minWidth:300}}
                 />
               </Card>
             </div>

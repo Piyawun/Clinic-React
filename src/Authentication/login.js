@@ -33,12 +33,11 @@ const LoginComponent = () => {
   const onFinish = (values) => {
     axios.post("/authentication/token", values)
       .then((res) => {
-        const { access_token, refresh_token, expires_in, staffID } = res.data
+        const { access_token, refresh_token, expires_in, staffID } = res.data.data
         localStorage.setItem("refreshToken", refresh_token)
         localStorage.setItem("accessToken", access_token)
         localStorage.setItem("expires_in", Math.floor(Date.now() / 1000) + expires_in)
         localStorage.setItem('staffID', staffID)
-        console.log(res.data)
         Modal.success({
           title: "Login success",
           onOk: () => {
