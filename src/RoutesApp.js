@@ -4,7 +4,7 @@ import { Switch, Route, Redirect } from 'react-router-dom'
 
 import Sidebar from './pages/SidebarComponent';
 
-
+import IndexComponent from './pages/IndexComponent'
 import Home from './pages/Home'
 import Login from './authentication/login'
 
@@ -70,7 +70,7 @@ const RoutesApp = () => {
     return (
         <Switch>
 
-            <PublicRoute exact path="/" force={true} component={Login}></PublicRoute>
+            <PublicRoute exact path="/" force={true} component={IndexComponent}></PublicRoute>
             <PublicRoute exact path="/login" force={true} component={Login}></PublicRoute>
             <PrivateRoute exact path="/dashboard" component={Home}></PrivateRoute>
 
