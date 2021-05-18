@@ -46,7 +46,7 @@ const LoginComponent = () => {
         });
       }).catch(({ response }) => {
         Modal.error({
-          title: response.data.error_description,
+          title: response.data.data.error_description,
         });
       })
     console.log('Success:', values);
@@ -59,7 +59,8 @@ const LoginComponent = () => {
   const [form] = Form.useForm();
 
   return (
-    <GlobalContext.Consumer>
+    <div style={{ minHeight: "100vh", backgroundImage: `url(${'https://images.unsplash.com/photo-1621251358612-a89db45dde0a?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1800&q=80'})` }}>
+      <GlobalContext.Consumer>
       {context =>
 
         <div className="site-card-wrapper" style={{ padding: "100px" }}>
@@ -122,7 +123,7 @@ const LoginComponent = () => {
         </div>
       }
     </GlobalContext.Consumer>
-
+      </div>
   )
 
 

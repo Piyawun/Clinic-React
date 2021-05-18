@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 
 import 'antd/dist/antd.css';
 import './App.css';
-
 import GlobalContext from './context/GlobalContext'
 
 import RoutesApp from './RoutesApp'
