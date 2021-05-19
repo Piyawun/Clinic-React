@@ -1,5 +1,5 @@
-import React,{useState} from 'react'
-import { useHistory } from "react-router-dom";
+import React, { useState } from 'react'
+import { useHistory, Redirect } from "react-router-dom";
 
 
 export default function Navbar(props) {
@@ -9,6 +9,10 @@ export default function Navbar(props) {
     function handleClick(path) {
         history.push(path)
     }
+    
+
+
+
     return (
         <nav
             className={
@@ -33,7 +37,20 @@ export default function Navbar(props) {
                     >
                         <i className="fas fa-arrow-alt-circle-down"></i> Login
                     </a>
-            
+                    <a 
+                        href={process.env.REACT_APP_SWAGGER_URL }
+                        className={
+                            (props.transparent
+                                ? "bg-white text-gray-800 active:bg-gray-100"
+                                : "bg-pink-500 text-white active:bg-pink-600") +
+                            " text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3"
+                        }
+                        type="button"
+                        style={{ transition: "all .15s ease" }}
+                    >
+                        <i className="fas fa-arrow-alt-circle-down"></i> Swagger
+                    </a>
+
                 </div>
                 <div
                     className={

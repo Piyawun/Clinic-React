@@ -41,7 +41,7 @@ export default function Footer() {
                         <div className="text-sm text-gray-600 font-semibold py-1">
                             Copyright © {new Date().getFullYear()}{" "}
                             <a
-                                href="https://www.creative-tim.com"
+                                href="#"
                                 className="text-gray-600 hover:text-gray-900"
                             >
                                 Oantwant Studio

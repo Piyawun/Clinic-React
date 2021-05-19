@@ -157,7 +157,7 @@ const SidebarComponent = ({ children }) => {
           </div>
         </Content>
 
-        <Footer className="footer" style={{ textAlign: 'center' }}>Oatwant Coppyright 2021</Footer>
+        <Footer className="footer" style={{ textAlign: 'center' }}>OatwantStudio Coppyright 2021</Footer>
 
       </Layout>
 

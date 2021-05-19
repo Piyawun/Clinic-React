@@ -34,9 +34,7 @@ class DoctorComponent extends React.Component {
                             detail: row.detail,
                             status: row.status
                         }
-
                         return data
-
                     }
 
 

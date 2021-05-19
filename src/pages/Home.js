@@ -2,7 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet'
 
 
-import { Card, Col, Row, Button, Modal, Input, Form, DatePicker, Table, Space, Tag } from 'antd';
+import { Card, Col, Row, Button, Modal, Input, Form, DatePicker, Table, Tag } from 'antd';
 
 import { PlusOutlined } from '@ant-design/icons';
 
@@ -35,10 +35,12 @@ class Home extends React.Component {
       bookingList: [],
       bottom: 'bottomCenter',
     }
+
+    this.wrapper = React.createRef();
   }
 
 
-  componentDidMount() {
+  UNSAFE_componentWillMount() {
     this.getData()
   }
 
@@ -179,6 +181,7 @@ class Home extends React.Component {
         </Helmet>
 
         <Modal
+          ref={this.wrapper}
           title="เพิ่ม"
           visible={visible}
           onOk={() => this.setState({ visible: false })}

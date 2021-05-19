@@ -39,13 +39,14 @@ class AddPatientComponent extends React.Component {
 
 
         const onFinish = (values) => {
+            console.log(values)
             axios.post('/patent', values.patient).then(res => {
                 if (res.status === 201) {
                     Toast.fire({
                         icon: 'success',
                         title: 'Create success'
                     }).then(() => {
-                        window.location = "/patient";
+                        // window.location = "/patient";
                     })
                 } else {
                     Toast.fire({
